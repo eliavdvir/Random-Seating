@@ -1,0 +1,152 @@
+
+
+<head>
+    <title>My Classroom</title>
+    <link rel="stylesheet" href="../Desktop/הצעות מחיר אליאב/more/Inter Web/inter.css">
+    <link rel="stylesheet" type="text/css" href="cssForClassRoom.css">
+    <script type="module" src="variables.js"></script>
+    <script type="module" src="classes.js"></script>
+    <script type="module" src="randomizer.js"></script>
+    <script type="module" src="functions.js"></script>
+    <script type="module" src="eventListeners.js"></script>
+  </head>
+  
+  <body>
+  <div id="bigBlock" class="ClassRoomDiv">
+    <div id="teacherTable" style="resize: both; overflow: auto;">
+      <div id="teacherTableheader"></div>
+    </div>
+    <div class="resize-handle"></div>
+  </div>
+  <button id="toggle-button">
+    <img id="toggleimg" src="https://i.ibb.co/wzdPY2B/right-arrow.png" alt=""></button>
+  <div id="editContainer">
+    <div id="editBar">
+      <button onclick="randomize()" id="randomizer">הושב רנדומלית</button>
+      <div id="sideRandom">
+        
+      </div>
+     <img src="https://i.ibb.co/nsJwmzT/shuffle.png" alt="" style="position: absolute; right: 2%; top: 5.5%; width: 6%; height: 4%;">
+      <div id="tableEditor">
+        <span id="tableCounterText">כמות שולחנות</span>
+        <span id="tableCounter"> 0 </span>
+        <button id="addTableButton" class="plusButton">+</button>
+        <button onclick="removeTable()" class="minusButton">-</button>
+       </div>
+      <div id="tableOptions" class="expandable">
+        <div class="expandable-header" style="cursor: pointer; user-select: none;">הצג אפשרויות מתקדמות +</div>
+        <div class="expandable-content">
+          <div id="tableSizes"> <br>
+            <span style=" position:relative; right: 5%; font-size: 120%; font-weight: 600;">שינוי גודל השולחנות (באחוזים מגודל הכיתה)
+            </span> <br>
+            <label for="tableWidth" style="position: relative; right:40%">רוחב</label>
+            <label for="tableHeight" style="position: relative; right:5%">גובה</label>
+  <br>
+            <input id="tableWidth" type="number" value="16" min="1" max="100" step="0.10" style="position: relative; left: 8%;">
+            <input id="tableHeight" type="number" value="9" min="1" max="100" step="0.10" style="position: relative; left: 11%;">
+            <button id="changeTableSize">החל</button>
+          </div>
+          <span style=" position:relative; top: 1.5%; right: 5%; font-size: 120%; font-weight: 600;">סידור שולחנות אוטומטי
+          </span> 
+          <div id="threeLinePos" onclick="positionTablesThreeInRow()" class="position-changers" style="position: relative; top: 2.5%; width:80%; left: 10%; height: 17.5%; border-width: 1px 0px;
+          border-style: solid;
+          border-color: #9D9D9D; color: #6b6b6b;">
+            <span style="position: relative; top: -2.5%; right: 20%; font-size: 60; font-weight: 600;">3</span> <br>
+            <span style="position: relative; top: -12.5%; right: 8.5%; font-size: 15; font-weight: 600;">שולחנות בשורה</span>
+          <img src="https://i.ibb.co/HPRGxrK/Group-13-1.png" alt="" id="threeLineImg" style="position: absolute; left: 5%; top: 12.5%; height: 75%; ">
+          </div>
+          <div id="fourLinePos" onclick="positionTablesFourInRow()" class="position-changers" style="position: relative; top: 2.5%; width:80%; left: 10%; height: 17.5%;border-bottom: 1px solid #9D9D9D; color: #6b6b6b;">
+            <span style="position: relative; top: -2.5%; right: 20%; font-size: 60; font-weight: 600;">4</span> <br>
+            <span style="position: relative; top: -12.5%; right: 8.5%; font-size: 15; font-weight: 600;">שולחנות בשורה</span>
+          <img src="https://i.ibb.co/fp0xx2K/fourgrey.png" alt="" id="fourLineImg" style="position: absolute; left: 5%; top: 12.5%; height: 75%; ">
+          </div>
+          <div id="fiveLinePos" onclick="positionTablesFiveInRow()" class="position-changers" style="position: relative; top: 2.5%; width:80%; left: 10%; height: 17.5%;border-bottom: 1px solid #9D9D9D; color: #6b6b6b;">
+            <span style="position: relative; top: -2.5%; right: 20%; font-size: 60; font-weight: 600;">5</span> <br>
+            <span style="position: relative; top: -12.5%; right: 8.5%; font-size: 15; font-weight: 600;">שולחנות בשורה</span>
+          <img src="https://i.ibb.co/zrJsx0x/fivegrey.png" alt="" id="fiveLineImg" style="position: absolute; left: 5%; top: 12.5%; height: 75%; ">
+          </div>
+          <div id="chetPos" class="position-changers" style="position: relative; top: 2.5%; width:80%; left: 10%; height: 17.5%;border-bottom: 1px solid #9D9D9D; color: #6b6b6b;">
+            <span style="position: relative; top: -2.5%; right: 20%; font-size: 60; font-weight: 600;">ח</span> <br>
+            <span style="position: relative; top: -12.5%; right: 18.5%; font-size: 15; font-weight: 600;">צורת ח׳</span>
+          <img src="https://i.ibb.co/f2fWSHj/chetgrey.png" alt="" id="chetImg" style="position: absolute; left: 5%; top: 12.5%; height: 75%; ">
+          </div>
+          <span style=" position:relative; top: 4.25%; right: 10%; font-size: 120%; font-weight: 600;">שולחן מורה</span>
+          <div id="teacherTableSlider">
+            <div id="teacherTableCircle"></div>
+          </div>
+          <div style="position: relative; top: -3%; width: 0.15%; height: 4.5%; background-color: grey; left: 56%;"></div>
+          <button onclick="lockAll()" style="position: relative; left: -47%; top: -7.75%; width: 17.5%; height: 5%; font-size: 10; font-weight: 525;">נעילת כל המושבים</button>
+          <div style="position: relative; top: -12.5%; width: 0.15%; height: 4.5%; background-color: grey; left: 32.5%;"></div>
+          <button onclick="unlockAll()" style="position: relative;  left: -70%; top: -17.25%; width: 22.5%; height: 5%; font-size: 10; font-weight: 525;">בטל נעילה לכל המושבים</button>
+  
+        </div>
+      </div>
+      
+      <div id="addStudentForm">
+        <span style="position:relative; top: 8%; left: 45%; font-weight: 600; user-select: none;">הוספת תלמידים</span>
+        <label for="newStudentName" id="nameLabel" style="position:relative; top: 19%; left: 75%;">שם</label>
+        <input type="text" id="newStudentName">
+  
+        <label for="newStudentGender" style="position:relative; top: 58%; left: 79%;">מין</label>
+        <select name="newStudentGender" id="newStudentGender">
+          <option value=""></option>
+          <option value="Male">בן</option>
+          <option value="Female">בת</option>
+        </select>
+        
+        <label for="sitNear" style="position:relative; top: 98%; left: 83.5%;">יושב ליד</label>
+        <select name="sitNear" id="sitNear">
+          <option value="Anyone">כולם</option>
+          <option value="Male">רק בנים</option>
+          <option value="Female">רק בנות</option>
+        </select>
+        <button onclick="addStudent()" id="addStudButton">הוסף תלמיד</button>
+      </div>
+      <div id="bulkStudents" class="expandable2">
+        <div class="expandable-header2" style="cursor: pointer; user-select: none;">הוסף תלמידים בכמות +</div>
+        <div class="expandable-content2">
+       <textarea name="" id="bulkStudentTextbox" cols="30" class="bulktextbox" rows="30"
+       placeholder="הוסף תלמידים בכמות באופן הבא:
+       שם,מין,יושב ליד
+       לדוגמא:
+       אבי כהן, בן, בנים,
+       נועה לוי, בת, כולם,
+       סמי, בן, בנות"
+       ></textarea> <br>
+       <input type="button" onclick="addStudentBulk()" value="הוסף כמות"
+       style="position: relative;">
+       <div id="errorBulkDiv" style=" position: relative; background-color: transparent;  overflow: auto; width: 100%; height: 20%;">
+      <span style="  position: absolute;
+      width: 10%;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 2.5%;
+      font-weight: 700;
+      color:#990f0f;
+      user-select: none;" id="errorCountdown"></span>
+      <div style="  position: absolute;
+      width: 10%;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -2.5%;
+      font-weight: 700;
+      color:black;
+      user-select: none;" id="errorXbutton"></div>
+        <div id="errorContent" style=" padding-left: 20px; width: 90%;">
+      </div>
+      </div>
+      </div>
+      <div id="studentListDiv" style="position: relative; top: 27.5%;">
+        <table id="studentTable">
+          <tr>
+            <th width="15%"></th>
+            <th width="30%">יושב ליד</th>
+              <th width="45%">שם</th>
+              <th width="10%" style="color:white;   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+              background-image: url('https://i.ibb.co/cc04fn2/people.png');" id="studentAmount" >0</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  
